@@ -1,2 +1,2 @@
 # shop
-Shop application make with C++ Qt framework and MySql 
+Shop application made with C++ Qt framework and MySql 
