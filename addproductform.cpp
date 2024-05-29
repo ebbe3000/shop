@@ -79,6 +79,12 @@ void AddProductForm::addProduct() {
 
     for (auto it : paths)
         db_->addPathToProductToDatabase(id_p, it);
+
+    emit productAdded();
+
+    QMessageBox::about(this, "Info", "Produkt dodany");
+
+    this->close();
 }
 
 QVector<int> AddProductForm::getCheckboxes() {

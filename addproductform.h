@@ -6,6 +6,7 @@
 #include <QStandardPaths>
 #include <QStringList>
 #include <QTemporaryFile>
+#include <QMessageBox>
 
 #include "database.h"
 
@@ -33,6 +34,9 @@ private slots:
     void addPhotos();
 
     void addProduct();
+
+signals:
+    void productAdded();
 
 };
 

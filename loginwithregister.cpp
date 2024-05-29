@@ -3,7 +3,7 @@
 
 #include <QDebug>
 
-LogInWithRegister::LogInWithRegister(QWidget *parent, Database* db)
+LogInWithRegister::LogInWithRegister(Database* db)
     : ui(new Ui::LogInWithRegister)
     , db_(db)
 {

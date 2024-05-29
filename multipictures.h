@@ -2,8 +2,9 @@
 #define MULTIPICTURES_H
 
 #include <QWidget>
+#include <QStackedLayout>
+#include <QLabel>
 
-#include "database.h"
 
 namespace Ui {
 class MultiPictures;
@@ -14,12 +15,18 @@ class MultiPictures : public QWidget
     Q_OBJECT
 
 public:
-    explicit MultiPictures(QWidget *parent = nullptr, const int id_p);
+    explicit MultiPictures(QWidget *parent = nullptr, QVector<QString> imgs = QVector<QString>());
     ~MultiPictures();
 
 private:
     Ui::MultiPictures *ui;
-    QVector<QPixmap> pics_;
+    QStackedLayout* stackedLayout;
+    int max_size_;
+    int curr_page_;
+
+private slots:
+    void prevButtonClicked();
+    void nextButtonClicked();
 };
 
 #endif // MULTIPICTURES_H

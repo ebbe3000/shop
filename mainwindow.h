@@ -5,6 +5,7 @@
 
 #include "loginwithregister.h"
 #include "accoutpage.h"
+#include "shoppingcart.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,15 +28,21 @@ public slots:
 
     void logOut();
 
-    void showShoppingCart();
-
     void showAccount();
+
+    void deleteProduct(const int id_p, const int amount, const int max_amount);
 
 private:
     Ui::MainWindow *ui;
     Database db_;
     User* user_;
-    AccoutPage* account_page;
+    AccoutPage* account_page_;
+    int page_size_;
+    int product_page_index_;
+    int records_amount_;
+    QVector<int> selected_categories_;
+    ShoppingCart* shopping_cart_page_;
+
 
 
     void disableAndHideButton(QPushButton* button);
@@ -43,8 +50,18 @@ private:
     void guestUiSetup();
     void userUiSetup();
     void productsButtonClicked();
+    void loadProductList();
+    void getSelectedCategories();
+
 
 private slots:
+    void mainNextButtonClicked();
+    void mainPrevButtonClicked();
+    void categoriesButtonClicked();
+    void searchButtonClicked();
+    void clearCategoriesButtonsClicked();
+    void addProductToShoppingCart(const int id_p, const int amount);
+    void onShoppingCartButtonClicked();
 
 };
 #endif // MAINWINDOW_H

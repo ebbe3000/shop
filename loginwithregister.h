@@ -15,7 +15,7 @@ class LogInWithRegister : public QDialog
     Q_OBJECT
 
 public:
-    explicit LogInWithRegister(QWidget *parent = nullptr, Database* db = nullptr);
+    explicit LogInWithRegister(Database* db);
     ~LogInWithRegister();
 
 private:
