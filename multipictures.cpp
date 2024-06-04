@@ -35,9 +35,24 @@ MultiPictures::~MultiPictures()
     delete ui;
 }
 
+void MultiPictures::adjustSize() {
+    for (int i = 0; i < stackedLayout->count (); ++i)
+    {
+        // determine the vertical size policy
+        QSizePolicy::Policy policy = QSizePolicy::Ignored;
+        if (i == stackedLayout->currentIndex ())
+            policy = QSizePolicy::Expanding;
+
+        // update the size policy
+        QWidget* pPage = stackedLayout->widget(i);
+        pPage->setSizePolicy (policy, policy);
+    }
+}
+
 
 void MultiPictures::prevButtonClicked() {
     stackedLayout->setCurrentIndex(--curr_page_);
+    adjustSize();
 
     if (curr_page_ == 0)
         ui->prevButton->setDisabled(true);
@@ -50,6 +65,7 @@ void MultiPictures::prevButtonClicked() {
 
 void MultiPictures::nextButtonClicked() {
     stackedLayout->setCurrentIndex(++curr_page_);
+    adjustSize();
 
     if (curr_page_ == max_size_ - 1)
         ui->nextButton->setDisabled(true);

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>684</width>
-    <height>413</height>
+    <width>751</width>
+    <height>535</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,24 +17,12 @@
    <string notr="true">color: white;</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
-   <property name="spacing">
-    <number>0</number>
-   </property>
-   <property name="leftMargin">
-    <number>0</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
-   <property name="bottomMargin">
-    <number>0</number>
-   </property>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
       <number>0</number>
      </property>
      <item>
@@ -120,8 +108,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>680</width>
-          <height>331</height>
+          <width>729</width>
+          <height>433</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -152,11 +140,22 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="addNewItemButton">
-       <property name="text">
-        <string>Dodaj produkt</string>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QPushButton" name="editPersonalDataButton">
+         <property name="text">
+          <string>Edytuj dane personalne</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="addNewItemButton">
+         <property name="text">
+          <string>Dodaj produkt</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>

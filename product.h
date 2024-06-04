@@ -116,7 +116,7 @@ public:
     double getPrice() const;
     int getAmount() const;
     QString getAddDate() const;
-    QString getDescribtion() const;
+    QString getDescription() const;
     QVector<QString> getImgPath() const;
 
 
@@ -127,8 +127,8 @@ public:
     void setAmount(int amount);
     void setAddDate(const QString& add_date);
     void setAddDate(QString&& add_date);
-    void setDescription(const QString& describtion);
-    void setDescription(QString&& describtion);
+    void setDescription(const QString& description);
+    void setDescription(QString&& description);
     void setImgPath(const QString& img_path);
     void setImgPath(const QVector<QString>& img_path);
     void setImgPath(QString&& img_path);

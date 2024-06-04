@@ -52,7 +52,24 @@ void AddProductForm::addProduct() {
         return;
     }
 
-    Product product(ui->productNameEdit->text(), user_->getId(), ui->productPriceEdit->text().toDouble(),
+    QString name = ui->productNameEdit->text();
+
+    int pos = name.indexOf("'");
+
+    if (pos != -1) {
+        for (int i = 0; i < name.size(); ++i) {
+            if (name[i] == '\'') {
+                name.insert(i, '\'');
+                ++i;
+                if (i == name.size())
+                    break;
+            }
+        }
+    }
+
+
+
+    Product product(std::move(name), user_->getId(), ui->productPriceEdit->text().toDouble(),
                     ui->productAmountEdit->text().toInt(), ui->productDescriptionEdit->toPlainText());
 
 

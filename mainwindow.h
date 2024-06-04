@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 
-#include "loginwithregister.h"
 #include "accoutpage.h"
 #include "shoppingcart.h"
 
@@ -42,6 +41,7 @@ private:
     int records_amount_;
     QVector<int> selected_categories_;
     ShoppingCart* shopping_cart_page_;
+    QString search_phrase_;
 
 
 

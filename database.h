@@ -22,6 +22,7 @@ public:
     bool isEmailInDb(const User& user);
     void addUserToDatabase(const User& user);
     bool isUserInDb(const QString& email, const QString& passwd, User*& user);
+    bool isProductInDb(const int id_p);
 
     QVector<Product*> getUsersSellProducts(const int id);
 
@@ -40,8 +41,8 @@ public:
     QVector<Product*> getAllProducts(const int page_index, const int page_limit,
                                      int& number_of_records);
 
-    QVector<Product*> getProductsByCategories(const int page_index, const int page_limit, int& number_of_records,
-                                              const QVector<int>& categories);
+    QVector<Product*> getProductsByCategoriesAndName(const int page_index, const int page_limit, int& number_of_records,
+                                              const QVector<int>& categories, const QString& search_phrase);
 
     void reduceProductAmount(const int id_p, const int amount);
 
@@ -60,6 +61,11 @@ public:
     void reduceProductAmountInShoppingCart(const int id_u, const int id_p, const int amount);
 
     void returnProductsToShop(const int id_p, const int amount);
+
+    void deleteWholeUsersShoppingCart(const int id_u);
+
+    void moveShoppingCartToPurchased(const int id_u, const int id_p, const int amount,
+                                     const QString& delivery_option, const QString& address);
 };
 
 #endif // DATABASE_H

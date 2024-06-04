@@ -13,6 +13,8 @@ ProductDetailPage::ProductDetailPage(const Product* product, const User* user, Q
     setModal(true);
     setAttribute(Qt::WA_DeleteOnClose);
     ui->amountSpinBox->setMaximum(product_->getAmount());
+    if (product_->getAmount() == 0)
+        ui->amountSpinBox->setDisabled(true);
     ui->availableAmountLabel->setText(QString::number(product_->getAmount()));
     ui->deleteProductButton->setHidden(true);
     ui->addToCartButton->setHidden(true);
@@ -29,9 +31,12 @@ ProductDetailPage::ProductDetailPage(const Product* product, const User* user, Q
         else
             ui->addToCartButton->setHidden(false);
 
+    if (product_->getAmount() == 0) {
+        ui->addToCartButton->setDisabled(true);
+    }
+
     QObject::connect(ui->deleteProductButton, &QPushButton::clicked, this, &ProductDetailPage::onDeleteButtonClicked);
     QObject::connect(ui->addToCartButton, &QPushButton::clicked, this, &ProductDetailPage::onAddToCartButton);
-    //QObject::connect(ui->deleteFromShoppingCartButton, &QPushButton, this, &ProductDetailPage::onDeleteFromShoppingCartButton);
 
     ui->sellerLabel->setText(full_name_of_seller);
     ui->addDateLabel->setText(product->getAddDate());

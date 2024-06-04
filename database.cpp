@@ -50,9 +50,9 @@ void Database::addUserToDatabase(const User& user) {
 
 
 bool Database::isUserInDb(const QString& email, const QString& passwd, User*& user) {
-    QSqlQuery query("SELECT u.id_u, u.name, u.surname, u.email, u.passwd, p.name, u.p_code, u.city, u.address "
-                    "FROM users u INNER JOIN provinces p ON u.id_p = p.id_p "
-                    "WHERE u.email = '" + email + "' AND u.passwd = '" + passwd + "';");
+    QSqlQuery query("SELECT u.id_u, u.first_name, u.surname, u.email, u.passwd, p.name, u.p_code, u.city, u.address "
+                    "FROM users u INNER JOIN provinces p ON u.id_prov = p.id_p "
+                    "WHERE u.email = '" + email + "' AND u.passwd = '" + passwd + "' AND u.active = 1;");
 
     if (!query.next())
         return false;
@@ -64,11 +64,20 @@ bool Database::isUserInDb(const QString& email, const QString& passwd, User*& us
     return true;
 }
 
+bool Database::isProductInDb(const int id_p) {
+    QSqlQuery query("SELECT id_p "
+                    "FROM products "
+                    "WHERE id_p = " + QString::number(id_p) + " AND active = 1;");
+    if (query.next())
+        return true;
+    return false;
+}
+
 
 QVector<Product*> Database::getUsersSellProducts(const int id) {
     QSqlQuery query("SELECT id_p, id_u, name, price, amount, add_date, description "
                     "FROM products "
-                    "WHERE id_u = " + QString::number(id) + ";");
+                    "WHERE id_u = " + QString::number(id) + "AND active = 1;");
 
     QVector<Product*> res;
 
@@ -99,7 +108,7 @@ int Database::addProductToDatabase(const Product& product) {
                     ", '" + product.getName() +
                     "', " + QString::number(product.getPrice()) +
                     ", " + QString::number(product.getAmount()) +
-                    ", CURDATE(), '" + product.getDescribtion() + "');");
+                    ", CURDATE(), '" + product.getDescription() + "');");
     return query.lastInsertId().toInt();
 }
 
@@ -119,7 +128,7 @@ void Database::addCategorizedProduct(const int id_p, const int id_c) {
 QVector<Product*> Database::getClientsProducts(const int id_u) {
     QSqlQuery query("SELECT id_p, id_u, name, price, amount, add_date, description "
                     "FROM products "
-                    "WHERE id_u = " + QString::number(id_u) + ";");
+                    "WHERE id_u = " + QString::number(id_u) + " AND active = 1;");
 
     QVector<Product*> result;
 
@@ -143,9 +152,9 @@ QVector<Product*> Database::getClientsProducts(const int id_u) {
 
 
 QString Database::getUserNameAndSurname(const int id_u) {
-    QSqlQuery query("SELECT name, surname "
+    QSqlQuery query("SELECT first_name, surname "
                     "FROM users "
-                    "WHERE id_u = " + QString::number(id_u) + ";");
+                    "WHERE id_u = " + QString::number(id_u) + " AND active = 1;");
 
     query.next();
 
@@ -154,21 +163,21 @@ QString Database::getUserNameAndSurname(const int id_u) {
 
 
 void Database::deleteProduct(const int id_p) {
-    QSqlQuery query("DELETE FROM products "
+    QSqlQuery query("UPDATE products "
+                    "SET active = 0 "
                     "WHERE id_p = " + QString::number(id_p) + ";");
 }
 
 
 QVector<Product*> Database::getAllProducts(const int page_index, const int page_limit, int& number_of_records) {
-    QSqlQuery records_amount("SELECT COUNT(id_p) "
-                             "FROM products;");
-    records_amount.next();
-    number_of_records = records_amount.value(0).toInt();
 
     QSqlQuery query("SELECT id_p, id_u, name, price, amount, add_date, description "
                     "FROM products "
+                    "WHERE active = 1 "
                     "ORDER BY id_p "
                     "LIMIT " + QString::number(page_limit) + " OFFSET " + QString::number(page_limit * page_index) + ";");
+
+    number_of_records = query.size();
 
     QVector<Product*> result;
 
@@ -190,21 +199,29 @@ QVector<Product*> Database::getAllProducts(const int page_index, const int page_
 }
 
 
-QVector<Product*> Database::getProductsByCategories(const int page_index, const int page_limit, int& number_of_records,
-                                                    const QVector<int>& categories) {
-    QString command = "SELECT id_p "
-                      "FROM categorized_products "
-                      "WHERE ";
+QVector<Product*> Database::getProductsByCategoriesAndName(const int page_index, const int page_limit, int& number_of_records,
+                                                    const QVector<int>& categories, const QString& search_phrase) {
+    QString command;
 
-    for (QVector<int>::const_iterator it = categories.begin(); it != categories.end(); ++it)
-        if (it == categories.begin())
-            command += "id_c = " + QString::number(*it);
-        else
-            command += " OR id_c = " + QString::number(*it);
+    if (categories.size() > 0) {
+        command = "SELECT id_p "
+                  "FROM categorized_products "
+                  "WHERE ";
+        for (QVector<int>::const_iterator it = categories.begin(); it != categories.end(); ++it)
+            if (it == categories.begin())
+                command += "id_c = " + QString::number(*it);
+            else
+                command += " OR id_c = " + QString::number(*it);
 
-    command += " GROUP BY id_p "
-               "HAVING COUNT(id_p) >= " + QString::number(categories.size()) + " "
-               "ORDER BY id_p;";
+        command += " GROUP BY id_p "
+                   "HAVING COUNT(id_p) >= " + QString::number(categories.size()) + " "
+                   "ORDER BY id_p;";
+    }
+    else {
+        command = "SELECT id_p "
+                  "FROM categorized_products "
+                  "ORDER BY id_p;";
+    }
 
     QSqlQuery query(command);
 
@@ -214,7 +231,7 @@ QVector<Product*> Database::getProductsByCategories(const int page_index, const 
 
     query.prepare("SELECT id_p, id_u, name, price, amount, add_date, description "
                   "FROM products "
-                  "WHERE id_p IN (" + command + ") "
+                  "WHERE id_p IN (" + command + ") AND active = 1 AND name LIKE '%" + search_phrase + "%'"
                   "LIMIT " + QString::number(page_limit) + " OFFSET " + QString::number(page_limit * page_index) + ";");
 
     query.exec();
@@ -313,12 +330,6 @@ void Database::deleteFromShoppingCart(const int id_u, const int id_p) {
 
 
 void Database::reduceProductAmountInShoppingCart(const int id_u, const int id_p, const int amount) {
-    // QSqlQuery max_amount("SELECT amount "
-    //                      "FROM shopping_carts "
-    //                      "WHERE id_u = " + QString::number(id_u) + " AND id_p = " + QString::number(id_p) + ";");
-    // max_amount.next();
-    // int tmp = max_amount.value(0).toInt();
-
     QSqlQuery update("UPDATE shopping_carts "
                      "SET amount = amount - " + QString::number(amount) + " "
                      "WHERE id_u = " + QString::number(id_u) + " AND id_p = " + QString::number(id_p) + ";");
@@ -329,4 +340,15 @@ void Database::returnProductsToShop(const int id_p, const int amount) {
     QSqlQuery update("UPDATE products "
                      "SET amount = amount + " + QString::number(amount) + " "
                      "WHERE id_p = " + QString::number(id_p) + ";");
+}
+
+void Database::deleteWholeUsersShoppingCart(const int id_u) {
+    QSqlQuery query("DELETE FROM shopping_carts "
+                    "WHERE id_u = " + QString::number(id_u) + ";");
+}
+
+void Database::moveShoppingCartToPurchased(const int id_u, const int id_p, const int amount,
+                                           const QString& delivery_option, const QString& address) {
+    QSqlQuery query("INSERT INTO purchased_products(id_u, id_p, amount, delivery_option, buyers_address) "
+                    "VALUES (" + QString::number(id_u) + ", " + QString::number(id_p) + ", " + QString::number(amount) + ", '" + delivery_option + "', '" + address + "');");
 }

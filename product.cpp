@@ -164,7 +164,7 @@ QString Product::getAddDate() const {
 }
 
 
-QString Product::getDescribtion() const {
+QString Product::getDescription() const {
     return description_;
 }
 
@@ -209,13 +209,13 @@ void Product::setAddDate(QString&& add_date) {
 }
 
 
-void Product::setDescription(const QString& describtion) {
-    description_ = describtion;
+void Product::setDescription(const QString& description) {
+    description_ = description;
 }
 
 
-void Product::setDescription(QString&& describtion) {
-    description_ = describtion;
+void Product::setDescription(QString&& description) {
+    description_ = description;
 }
 
 

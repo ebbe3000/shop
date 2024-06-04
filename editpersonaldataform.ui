@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditPersonalDataForm</class>
+ <widget class="QWidget" name="EditPersonalDataForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>447</width>
+    <height>614</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>765</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>133</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Imie</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="nameEdit">
+       <property name="maximumSize">
+        <size>
+         <width>244</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Nazwisko</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="surnameEdit">
+       <property name="maximumSize">
+        <size>
+         <width>244</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>email'</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="emailEdit">
+       <property name="maximumSize">
+        <size>
+         <width>244</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>haslo</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="passwdEdit">
+       <property name="maximumSize">
+        <size>
+         <width>244</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>wojewodztwo</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="provincesComboBox">
+       <item>
+        <property name="text">
+         <string>Dolnośląskie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Kujawsko-pomorskie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Lubelskie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Lubuskie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Łódzkie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Małopolskie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Mazowieckie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Opolskie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Podkarpackie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Podlaskie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Pomorskie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Śląskie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Świętokrzyskie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Warmińsko-mazurskie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Wielkopolskie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Zachodniopomorskie</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>kod pocztwoy</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="zipCodeEdit">
+       <property name="maximumSize">
+        <size>
+         <width>244</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="inputMask">
+        <string>99-999</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>miasto</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="cityEdit">
+       <property name="maximumSize">
+        <size>
+         <width>244</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>adres</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="addressEdit">
+       <property name="maximumSize">
+        <size>
+         <width>244</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>Zmień dane</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>132</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

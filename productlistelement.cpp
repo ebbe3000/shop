@@ -20,6 +20,11 @@ ProductListElement::ProductListElement(QWidget *parent, const Product* product, 
     ui->fullNameLabel->setText(full_name_of_seller);
     if (user_ == nullptr || user_->getId() != product_->getIdU())
         ui->deleteProductButton->setHidden(true);
+    if (shopping_cart_mode == 2) {
+        ui->deleteProductButton->setHidden(true);
+        ui->showProductButton->setHidden(true);
+    }
+
 
     QObject::connect(ui->showProductButton, &QPushButton::clicked, this, &ProductListElement::onShowButtonClicked);
     QObject::connect(ui->deleteProductButton, &QPushButton::clicked, this, &ProductListElement::onDeleteButtonClicked);

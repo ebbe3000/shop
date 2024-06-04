@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->checkboxArea->setHidden(true);
     ui->mainPrevButton->setDisabled(true);
 
+
     guestUiSetup();
 
     QObject::connect(ui->nameSignInButton, &QPushButton::clicked, this, &MainWindow::userButtonClicked);
@@ -58,6 +59,7 @@ MainWindow::MainWindow(QWidget *parent)
     shopping_cart_page_ = new ShoppingCart(this, &db_, user_);
     QObject::connect(ui->iconShoppingCartButton, &QPushButton::clicked, this, &MainWindow::onShoppingCartButtonClicked);
     QObject::connect(ui->nameShoppingCartButton, &QPushButton::clicked, this, &MainWindow::onShoppingCartButtonClicked);
+    QObject::connect(shopping_cart_page_, &ShoppingCart::onUserLoggedIn, this, &MainWindow::onUserLoggedIn);
     QObject::connect(shopping_cart_page_, &ShoppingCart::refreshPage, [=]() {
         loadProductList();
     });
@@ -69,6 +71,10 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    if (user_ == nullptr && !shopping_cart_page_->isShoppingCartEmpty())
+        shopping_cart_page_->returnProductsToShop();
+
+
     db_.closeDb();
     delete shopping_cart_page_;
     delete account_page_;
@@ -159,11 +165,13 @@ void MainWindow::searchButtonClicked() {
     product_page_index_ = 0;
     ui->mainPrevButton->setDisabled(true);
     getSelectedCategories();
+    search_phrase_ = ui->searchLine->text();
     loadProductList();
 }
 
 void MainWindow::onShoppingCartButtonClicked() {
     ui->stackedWidget->setCurrentIndex(2);
+    ui->buttonsFrame->setHidden(true);
     shopping_cart_page_->loadShoppingCart();
 }
 
@@ -186,11 +194,15 @@ void MainWindow::onUserLoggedIn(User* user) {
     userUiSetup();
     loadProductList();
     shopping_cart_page_->setUser(user_);
+    shopping_cart_page_->deleteUsersOwnItems();
+    shopping_cart_page_->addSelectedProductsToDb();
+    shopping_cart_page_->clearShoppingCartLocal();
     shopping_cart_page_->loadShoppingCartFromDb(user_->getId());
 }
 
 
 void MainWindow::logOut() {
+    ui->buttonsFrame->setHidden(false);
     ui->stackedWidget->setCurrentIndex(0);
     account_page_->setParent(nullptr);
     ui->stackedWidget->removeWidget(account_page_);
@@ -205,12 +217,14 @@ void MainWindow::logOut() {
 
 
 void MainWindow::showAccount() {
+    ui->buttonsFrame->setHidden(true);
     account_page_->fillUserData();
     ui->stackedWidget->setCurrentIndex(3);
 }
 
 void MainWindow::productsButtonClicked() {
     loadProductList();
+    ui->buttonsFrame->setHidden(false);
 
     ui->stackedWidget->setCurrentIndex(0);
 }
@@ -263,12 +277,12 @@ void MainWindow::loadProductList() {
 
     QVector<Product*> products;
 
-    if (selected_categories_.isEmpty())
+    if (selected_categories_.isEmpty() && search_phrase_ == "")
         // show products without specifying category
         products = db_.getAllProducts(product_page_index_, page_size_, records_amount_);
     else
         // show categorized products
-        products = db_.getProductsByCategories(product_page_index_, page_size_, records_amount_, selected_categories_);
+        products = db_.getProductsByCategoriesAndName(product_page_index_, page_size_, records_amount_, selected_categories_, search_phrase_);
 
 
     if (records_amount_ <= 0) {
@@ -281,6 +295,7 @@ void MainWindow::loadProductList() {
     for (auto it : products) {
         ProductListElement* product_list_element = new ProductListElement(this, it, user_, db_.getUserNameAndSurname(it->getIdU()));
         ui->productsContainer->addWidget(product_list_element);
+        ui->productsContainer->setAlignment(ui->productsContainer, Qt::AlignTop);
         QObject::connect(product_list_element, &ProductListElement::deleteProduct, this, &MainWindow::deleteProduct);
         QObject::connect(product_list_element, &ProductListElement::addProductToShoppingCart, this, &MainWindow::addProductToShoppingCart);
     }

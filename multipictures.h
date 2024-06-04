@@ -23,6 +23,7 @@ private:
     QStackedLayout* stackedLayout;
     int max_size_;
     int curr_page_;
+    void adjustSize();
 
 private slots:
     void prevButtonClicked();

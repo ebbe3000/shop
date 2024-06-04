@@ -4,6 +4,7 @@
 #include <QDialog>
 
 #include "database.h"
+#include "focuswatcher.h"
 
 
 namespace Ui {
@@ -21,8 +22,19 @@ public:
 private:
     Ui::LogInWithRegister *ui;
     Database* db_;
+    QString name_;
+    QString surname_;
+    QString email_;
+    QString passwd_;
+    QString province_;
+    QString zip_code_;
+    QString city_;
+    QString address_;
+    bool ok[7];
+    QString wrong_data_edit_;
 
-    bool registerValidateData(User& user);
+
+    bool registerValidateData();
 
 public slots:
     void logIn();
@@ -31,6 +43,15 @@ public slots:
 
 signals:
     void userLoggedIn(User* user);
+
+private slots:
+    void checkName();
+    void checkSurname();
+    void checkEmail();
+    void checkPasswd();
+    void checkZipCode();
+    void checkCity();
+    void checkAddress();
 
 };
 
