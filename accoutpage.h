@@ -5,6 +5,7 @@
 
 #include "addproductform.h"
 #include "productlistelement.h"
+#include "editpersonaldataform.h"
 
 namespace Ui {
 class AccoutPage;
@@ -34,6 +35,8 @@ private:
 private slots:
 
     void addNewItem();
+
+    void editPersonalData();
 
 signals:
     void forwardDeleteProduct(const int id_p, const int amount, const int max_amount);

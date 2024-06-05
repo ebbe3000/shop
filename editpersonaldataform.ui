@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>447</width>
-    <height>614</height>
+    <width>421</width>
+    <height>565</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -38,7 +38,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Imie</string>
+        <string>Imię</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -78,7 +78,7 @@
      <item>
       <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>email'</string>
+        <string>Email</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -98,7 +98,7 @@
      <item>
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>haslo</string>
+        <string>Hasło</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -118,7 +118,7 @@
      <item>
       <widget class="QLabel" name="label_5">
        <property name="text">
-        <string>wojewodztwo</string>
+        <string>Województwo</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -212,7 +212,7 @@
      <item>
       <widget class="QLabel" name="label_6">
        <property name="text">
-        <string>kod pocztwoy</string>
+        <string>Kod pocztowy</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -238,7 +238,7 @@
      <item>
       <widget class="QLabel" name="label_7">
        <property name="text">
-        <string>miasto</string>
+        <string>Miasto</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -258,7 +258,7 @@
      <item>
       <widget class="QLabel" name="label_8">
        <property name="text">
-        <string>adres</string>
+        <string>Adres</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignCenter</set>

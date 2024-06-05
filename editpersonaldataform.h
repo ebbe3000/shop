@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+#include "user.h"
+
 namespace Ui {
 class EditPersonalDataForm;
 }
@@ -12,7 +14,7 @@ class EditPersonalDataForm : public QDialog
     Q_OBJECT
 
 public:
-    explicit EditPersonalDataForm();
+    explicit EditPersonalDataForm(const User* user);
     ~EditPersonalDataForm();
 
 private:

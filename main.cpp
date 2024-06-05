@@ -13,10 +13,7 @@ int main(int argc, char *argv[])
 //
 
 // deleting photos for adding product in productadd form :)
-// loginpage find problem on lost focus (check if valid on lost focux)
+
+// edit personal data
 
 // productlistelement picture should resize horizontally to fit its all content
-
-// before byuing check if still in database
-
-// do buying

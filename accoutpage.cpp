@@ -10,6 +10,7 @@ AccoutPage::AccoutPage(QWidget *parent, Database* db, User* user)
 {
     ui->setupUi(this);
     QObject::connect(ui->addNewItemButton, &QPushButton::clicked, this, &AccoutPage::addNewItem);
+    QObject::connect(ui->editPersonalDataButton, &QPushButton::clicked, this, &AccoutPage::editPersonalData);
 }
 
 
@@ -38,6 +39,11 @@ void AccoutPage::addNewItem() {
     AddProductForm* new_product = new AddProductForm(this, db_, user_);
     QObject::connect(new_product, &AddProductForm::productAdded, this, &AccoutPage::initializeList);
     new_product->show();
+}
+
+void AccoutPage::editPersonalData() {
+    EditPersonalDataForm* edit_form = new EditPersonalDataForm(user_);
+    edit_form->show();
 }
 
 
