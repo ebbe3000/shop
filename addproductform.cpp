@@ -112,14 +112,16 @@ void AddProductForm::addProduct() {
     if (!categories.isEmpty())
         for (auto it : categories)
             db_->addCategorizedProduct(id_p, it);
+    else
+        db_->addCategorizedProduct(id_p, 10);
 
     QVector<QString> paths;
 
     if (pics_.isEmpty())
-        paths.push_back("D:/shop/shop/imgs/q_mark.png");
+        paths.push_back("/home/pawel/qt_project/imgs/q_mark.png");
     else
         for (auto it : pics_) {
-            QTemporaryFile file("D:/shop/shop/imgs/XXXXXX.png");
+            QTemporaryFile file("/home/pawel/qt_project/imgs/XXXXXX.png");
             file.open();
             it.first.save(&file, "PNG");
             file.setAutoRemove(false);

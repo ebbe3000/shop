@@ -170,6 +170,11 @@ void Database::deleteProduct(const int id_p) {
 
 
 QVector<Product*> Database::getAllProducts(const int page_index, const int page_limit, int& number_of_records) {
+    QSqlQuery query_size("SELECT id_p, id_u, name, price, amount, add_date, description "
+                         "FROM products "
+                         "WHERE active = 1;");
+
+    number_of_records = query_size.size();
 
     QSqlQuery query("SELECT id_p, id_u, name, price, amount, add_date, description "
                     "FROM products "
@@ -177,7 +182,7 @@ QVector<Product*> Database::getAllProducts(const int page_index, const int page_
                     "ORDER BY id_p "
                     "LIMIT " + QString::number(page_limit) + " OFFSET " + QString::number(page_limit * page_index) + ";");
 
-    number_of_records = query.size();
+
 
     QVector<Product*> result;
 
@@ -223,11 +228,18 @@ QVector<Product*> Database::getProductsByCategoriesAndName(const int page_index,
                   "ORDER BY id_p;";
     }
 
-    QSqlQuery query(command);
+    QSqlQuery query;
 
-    number_of_records = query.size();
 
     command.chop(1);
+
+    query.prepare("SELECT id_p, id_u, name, price, amount, add_date, description "
+                  "FROM products "
+                  "WHERE id_p IN (" + command + ") AND active = 1 AND name LIKE '%" + search_phrase + "%';");
+
+    query.exec();
+
+    number_of_records = query.size();
 
     query.prepare("SELECT id_p, id_u, name, price, amount, add_date, description "
                   "FROM products "

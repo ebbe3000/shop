@@ -16,7 +16,7 @@ AccoutPage::AccoutPage(QWidget *parent, Database* db, User* user)
 
 AccoutPage::~AccoutPage()
 {
-    while (ui->productsContainer->count() != 0) {
+    while (ui->productsContainer->count() > 1) {
         QLayoutItem* item = ui->productsContainer->takeAt(0);
         item->widget()->setParent(nullptr);
         ui->productsContainer->removeWidget(item->widget());
