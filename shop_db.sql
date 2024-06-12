@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Cze 04, 2024 at 09:08 PM
+-- Generation Time: Cze 12, 2024 at 11:08 AM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -25,6 +25,20 @@ DELIMITER $$
 --
 -- Procedury
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `editUserData` (IN `in_id` INT(8), IN `in_name` VARCHAR(30), IN `in_surname` VARCHAR(50), IN `in_email` VARCHAR(50), IN `in_passwd` VARCHAR(50), IN `in_province` VARCHAR(30), IN `in_p_code` VARCHAR(6), IN `in_city` VARCHAR(50), IN `in_address` VARCHAR(50))   BEGIN
+
+set @id = 0;
+
+SELECT id_p INTO @id
+FROM provinces p 
+WHERE p.name = in_province;
+
+UPDATE users
+SET first_name = in_name, surname = in_surname, email = in_email, passwd = in_passwd, id_prov = @id, p_code = in_p_code, city = in_city, address = in_address 
+WHERE id_u = in_id;
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insertUser` (IN `in_name` VARCHAR(30), IN `in_surname` VARCHAR(50), IN `in_email` VARCHAR(50), IN `in_passwd` VARCHAR(50), IN `in_province` VARCHAR(30), IN `in_p_code` VARCHAR(6), IN `in_city` VARCHAR(50), IN `in_address` VARCHAR(50))   BEGIN
 
 set @id = 0;
@@ -123,7 +137,28 @@ INSERT INTO `categorized_products` (`id_p`, `id_c`) VALUES
 (30, 4),
 (30, 8),
 (36, 5),
-(36, 9);
+(36, 9),
+(37, 1),
+(37, 5),
+(37, 7),
+(38, 1),
+(38, 2),
+(38, 7),
+(39, 2),
+(39, 3),
+(39, 5),
+(40, 1),
+(40, 2),
+(40, 5),
+(41, 1),
+(41, 2),
+(41, 5),
+(42, 1),
+(42, 2),
+(42, 5),
+(43, 1),
+(43, 2),
+(43, 5);
 
 -- --------------------------------------------------------
 
@@ -181,7 +216,23 @@ INSERT INTO `loggs` (`id`, `date_time`, `operation`) VALUES
 (37, NULL, 'Próba dodania nowego uzytkowni'),
 (38, NULL, 'Dodano nowego uzytkownika: id_'),
 (39, NULL, 'Próba dodania nowego produktu:'),
-(40, NULL, 'Dodano nowy produkt: id=36, id');
+(40, NULL, 'Dodano nowy produkt: id=36, id'),
+(41, NULL, 'Próba dodania nowego produktu:'),
+(42, NULL, 'Dodano nowy produkt: id=37, id'),
+(43, NULL, 'Próba dodania nowego uzytkowni'),
+(44, NULL, 'Dodano nowego uzytkownika: id_'),
+(45, NULL, 'Próba dodania nowego produktu:'),
+(46, NULL, 'Dodano nowy produkt: id=38, id'),
+(47, NULL, 'Próba dodania nowego produktu:'),
+(48, NULL, 'Dodano nowy produkt: id=39, id'),
+(49, NULL, 'Próba dodania nowego produktu:'),
+(50, NULL, 'Dodano nowy produkt: id=40, id'),
+(51, NULL, 'Próba dodania nowego produktu:'),
+(52, NULL, 'Dodano nowy produkt: id=41, id'),
+(53, NULL, 'Próba dodania nowego produktu:'),
+(54, NULL, 'Dodano nowy produkt: id=42, id'),
+(55, NULL, 'Próba dodania nowego produktu:'),
+(56, NULL, 'Dodano nowy produkt: id=43, id');
 
 -- --------------------------------------------------------
 
@@ -207,7 +258,19 @@ INSERT INTO `path_to_images` (`id_p`, `path`) VALUES
 (29, 'D:/shop/shop/imgs/vVdPjB.png'),
 (30, 'D:/shop/shop/imgs/dwIpLs.png'),
 (36, 'D:/shop/shop/imgs/EcriJZ.png'),
-(36, 'D:/shop/shop/imgs/TTMrVo.png');
+(36, 'D:/shop/shop/imgs/TTMrVo.png'),
+(37, 'D:/shop/shop/imgs/ifumxp.png'),
+(37, 'D:/shop/shop/imgs/Nfcsds.png'),
+(38, 'D:/shop/shop/imgs/yDPGxG.png'),
+(38, 'D:/shop/shop/imgs/LvKKiB.png'),
+(39, 'D:/shop/shop/imgs/UaaZpK.png'),
+(39, 'D:/shop/shop/imgs/cfLVXu.png'),
+(40, 'D:/shop/shop/imgs/FeIZFM.png'),
+(40, 'D:/shop/shop/imgs/JABNVO.png'),
+(41, 'D:/shop/shop/imgs/SYOvYB.png'),
+(42, 'D:/shop/shop/imgs/eYroLU.png'),
+(43, 'D:/shop/shop/imgs/zJLLYw.png'),
+(43, 'D:/shop/shop/imgs/sHMKSC.png');
 
 -- --------------------------------------------------------
 
@@ -231,12 +294,19 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id_p`, `id_u`, `name`, `price`, `amount`, `add_date`, `description`, `active`) VALUES
-(26, 14, 'Buty', 249.99, 1, '2024-06-01', 'Nowe buty markowe.', 1),
-(27, 14, 'Piłka do siatkówki', 150.00, 1, '2024-06-01', 'Nowe piłki Dippsta', 1),
-(28, 17, 'Monitor 24\'', 449.99, 1, '2024-06-01', 'Monitory 60 Hz', 1),
-(29, 17, 'Komplet opon zimowych', 1200.00, 0, '2024-06-01', 'Opony na zime dobrej firmy', 1),
+(26, 14, 'Buty', 249.99, 1, '2024-06-01', 'Nowe buty markowe.', 0),
+(27, 14, 'Piłka do siatkówki', 150.00, 1, '2024-06-01', 'Nowe piłki Dippsta', 0),
+(28, 17, 'Monitor 24\'', 449.99, 0, '2024-06-01', 'Monitory 60 Hz', 0),
+(29, 17, 'Komplet opon zimowych', 1200.00, 0, '2024-06-01', 'Opony na zime dobrej firmy', 0),
 (30, 19, 'Krem na noc', 34.99, 1, '2024-06-01', 'Krem na noc. Bardzo dobry.', 1),
-(36, 25, 'Piłka Tango 2012', 33.33, 2, '2024-06-02', 'Piłka Jakuba Błaszczykowskiego', 0);
+(36, 25, 'Piłka Tango 2012', 33.33, 2, '2024-06-02', 'Piłka Jakuba Błaszczykowskiego', 0),
+(37, 14, 'hehexd', 12.22, 5, '2024-06-08', 'opis', 0),
+(38, 14, 'Produkt', 12.22, 22, '2024-06-09', '222OPisd', 0),
+(39, 14, 'Produkt', 12.22, 2, '2024-06-09', 'Opisek', 0),
+(40, 14, 'abcdef', 666.55, 2, '2024-06-09', 'hhahahax', 0),
+(41, 14, 'nowy produkt', 12.22, 3, '2024-06-09', '75ufdsjn', 0),
+(42, 14, 'nwoypr', 33.11, 3, '2024-06-09', 'ghfbdiogd', 0),
+(43, 14, 'nowfsdfghnvu', 777.77, 1, '2024-06-09', 'abcedef', 1);
 
 --
 -- Wyzwalacze `products`
@@ -307,7 +377,8 @@ CREATE TABLE `purchased_products` (
 INSERT INTO `purchased_products` (`id_u`, `id_p`, `amount`, `delivery_option`, `buyers_address`, `buy_time`) VALUES
 (15, 28, 1, 'Dostawa LHD', 'Poznań Krakowska 5', '2024-06-01 12:02:53'),
 (15, 29, 1, 'Dostawa LHD', 'Poznań Krakowska 5', '2024-06-01 12:03:49'),
-(17, 30, 2, 'Odbiór osobisty na UKSW', 'Nasielsk Leśna 13', '2024-06-01 12:24:15');
+(17, 30, 2, 'Odbiór osobisty na UKSW', 'Nasielsk Leśna 13', '2024-06-01 12:24:15'),
+(14, 28, 1, 'Dostawa LHD', 'Warszawa Wóycickiego', '2024-06-09 00:31:37');
 
 -- --------------------------------------------------------
 
@@ -352,12 +423,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_u`, `first_name`, `surname`, `email`, `passwd`, `id_prov`, `p_code`, `city`, `address`, `active`) VALUES
-(14, 'Maciej', 'Nowak', 'nowa@nowa', '123123', 16, '12-120', 'Warszawa', 'Wóycickiego', 1),
+(14, 'Adam', 'Nowak', 'nowa@nowa', '123123', 16, '12-120', 'Warszawa', 'Wóycickiego', 1),
 (15, 'Andrzej', 'Kowalski', 'kowal@kowal', '123321', 14, '00-000', 'Poznań', 'Krakowska 5', 1),
 (17, 'Julianna', 'Bobko', 'bob@gmail.com', '111222', 7, '05-190', 'Nasielsk', 'Leśna 13', 1),
 (18, 'Mirosław', 'Kuźnicki', 'miro@onet.pl', '321321', 16, '12-122', 'Płock', 'Basenowa 22', 1),
-(19, 'Zuzanna', 'Pietrak', 'zupie@wp.pl', '123123123', 5, '15-190', 'Chrząszczyrzewoszyce', 'Duża 5', 1),
-(25, 'Maciej', 'Grzywacki', 'grzywa@gmail.com', '123321123', 9, '12-303', 'Warszawa', 'Dworzec Gdański 15', 1);
+(19, 'Zuzanna', 'Pietryk', 'zupie@wp.pl', '123123123', 5, '15-190', 'Chrząszczyrzewoszyce', 'Duża 5', 1),
+(25, 'Maciej', 'Grzywacki', 'grzywa@gmail.com', '123321123', 9, '12-303', 'Warszawa', 'Dworzec Gdański 15', 1),
+(26, 'Krzysztof', 'Niegit', 'kubam@gmail.com', '123456', 7, '12-222', 'Warszawa', 'Wrocław', 1);
 
 --
 -- Wyzwalacze `users`
@@ -454,13 +526,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `loggs`
 --
 ALTER TABLE `loggs`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id_p` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_p` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `provinces`
@@ -472,7 +544,7 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_u` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_u` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables
