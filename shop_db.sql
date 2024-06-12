@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Cze 12, 2024 at 11:08 AM
+-- Generation Time: Cze 12, 2024 at 11:37 AM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -232,7 +232,37 @@ INSERT INTO `loggs` (`id`, `date_time`, `operation`) VALUES
 (53, NULL, 'Próba dodania nowego produktu:'),
 (54, NULL, 'Dodano nowy produkt: id=42, id'),
 (55, NULL, 'Próba dodania nowego produktu:'),
-(56, NULL, 'Dodano nowy produkt: id=43, id');
+(56, NULL, 'Dodano nowy produkt: id=43, id'),
+(57, NULL, 'Próba dodania nowego produktu:'),
+(58, NULL, 'Dodano nowy produkt: id=44, id'),
+(59, NULL, 'Próba dodania nowego produktu:'),
+(60, NULL, 'Dodano nowy produkt: id=45, id'),
+(61, NULL, 'Próba dodania nowego produktu:'),
+(62, NULL, 'Dodano nowy produkt: id=46, id'),
+(63, NULL, 'Próba dodania nowego produktu:'),
+(64, NULL, 'Dodano nowy produkt: id=47, id'),
+(65, NULL, 'Próba dodania nowego produktu:'),
+(66, NULL, 'Dodano nowy produkt: id=48, id'),
+(67, NULL, 'Próba dodania nowego produktu:'),
+(68, NULL, 'Dodano nowy produkt: id=49, id'),
+(69, NULL, 'Próba dodania nowego produktu:'),
+(70, NULL, 'Dodano nowy produkt: id=50, id'),
+(71, NULL, 'Próba dodania nowego produktu:'),
+(72, NULL, 'Dodano nowy produkt: id=51, id'),
+(73, NULL, 'Próba dodania nowego produktu:'),
+(74, NULL, 'Dodano nowy produkt: id=52, id'),
+(75, NULL, 'Próba dodania nowego produktu:'),
+(76, NULL, 'Dodano nowy produkt: id=53, id'),
+(77, NULL, 'Próba dodania nowego produktu:'),
+(78, NULL, 'Dodano nowy produkt: id=54, id'),
+(79, NULL, 'Próba dodania nowego produktu:'),
+(80, NULL, 'Dodano nowy produkt: id=55, id'),
+(81, NULL, 'Próba dodania nowego produktu:'),
+(82, NULL, 'Dodano nowy produkt: id=56, id'),
+(83, NULL, 'Próba dodania nowego produktu:'),
+(84, NULL, 'Dodano nowy produkt: id=57, id'),
+(85, NULL, 'Próba dodania nowego produktu:'),
+(86, NULL, 'Dodano nowy produkt: id=58, id');
 
 -- --------------------------------------------------------
 
@@ -306,7 +336,22 @@ INSERT INTO `products` (`id_p`, `id_u`, `name`, `price`, `amount`, `add_date`, `
 (40, 14, 'abcdef', 666.55, 2, '2024-06-09', 'hhahahax', 0),
 (41, 14, 'nowy produkt', 12.22, 3, '2024-06-09', '75ufdsjn', 0),
 (42, 14, 'nwoypr', 33.11, 3, '2024-06-09', 'ghfbdiogd', 0),
-(43, 14, 'nowfsdfghnvu', 777.77, 1, '2024-06-09', 'abcedef', 1);
+(43, 14, 'nowfsdfghnvu', 777.77, 1, '2024-06-09', 'abcedef', 1),
+(44, 14, 'Product A', 19.99, 100, '2024-06-01', 'Description for Product A', 1),
+(45, 15, 'Product B', 29.99, 150, '2024-06-02', 'Description for Product B', 1),
+(46, 17, 'Product C', 39.99, 200, '2024-06-03', 'Description for Product C', 1),
+(47, 18, 'Product D', 49.99, 250, '2024-06-04', 'Description for Product D', 1),
+(48, 19, 'Product E', 59.99, 300, '2024-06-05', 'Description for Product E', 1),
+(49, 25, 'Product F', 69.99, 350, '2024-06-06', 'Description for Product F', 1),
+(50, 26, 'Product G', 79.99, 400, '2024-06-07', 'Description for Product G', 1),
+(51, 14, 'Product H', 89.99, 450, '2024-06-08', 'Description for Product H', 1),
+(52, 15, 'Product I', 99.99, 500, '2024-06-09', 'Description for Product I', 1),
+(53, 17, 'Product J', 109.99, 550, '2024-06-10', 'Description for Product J', 1),
+(54, 18, 'Product K', 119.99, 600, '2024-06-11', 'Description for Product K', 1),
+(55, 19, 'Product L', 129.99, 650, '2024-06-12', 'Description for Product L', 1),
+(56, 25, 'Product M', 139.99, 700, '2024-06-13', 'Description for Product M', 1),
+(57, 26, 'Product N', 149.99, 750, '2024-06-14', 'Description for Product N', 1),
+(58, 14, 'Product O', 159.99, 800, '2024-06-15', 'Description for Product O', 1);
 
 --
 -- Wyzwalacze `products`
@@ -526,13 +571,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `loggs`
 --
 ALTER TABLE `loggs`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id_p` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_p` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `provinces`
