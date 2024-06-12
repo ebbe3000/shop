@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
-#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,7 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->setCurrentIndex(0);
     ui->checkboxArea->setHidden(true);
     ui->mainPrevButton->setDisabled(true);
-
+    ui->scrollArea->setFrameShape(QFrame::NoFrame);
+    ui->categoriesScollArea->setFrameShape(QFrame::NoFrame);
 
     guestUiSetup();
 
@@ -34,6 +34,15 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(ui->mainNextButton, &QPushButton::clicked, this, &MainWindow::mainNextButtonClicked);
     QObject::connect(ui->searchButton, &QPushButton::clicked, this, &MainWindow::searchButtonClicked);
     QObject::connect(ui->clearCategoriesButton, &QPushButton::clicked, this, &MainWindow::clearCategoriesButtonsClicked);
+
+    ButtonHoverWatcher* watcher_menu_icon = new ButtonHoverWatcher(this, ":/icons_black/menu.png", ":/icons_black/arrow-right-circle.png");
+    ui->iconMenuButton->installEventFilter(watcher_menu_icon);
+
+    ButtonHoverWatcher* watcher_menu_name = new ButtonHoverWatcher(this, ":/icons_black/menu.png", ":/icons_black/arrow-left-circle.png");
+    ui->nameMenuButton->installEventFilter(watcher_menu_name);
+
+    ui->categoriesButton->setStyleSheet("border-bottom-right-radius: 0%; border-top-right-radius: 0%; margin-right: 0px;");
+    ui->searchButton->setStyleSheet("border-bottom-left-radius: 0%; border-top-left-radius: 0%; border-left: 0px;");
 
 
     if (!db_.isConnected()) {
@@ -53,6 +62,9 @@ MainWindow::MainWindow(QWidget *parent)
 
         ui->iconProductsButton->setDisabled(true);
         ui->nameProductsButton->setDisabled(true);
+
+        ui->searchButton->setDisabled(true);
+        ui->categoriesButton->setDisabled(true);
         return;
     }
 
@@ -157,12 +169,23 @@ void MainWindow::mainPrevButtonClicked() {
 
 
 void MainWindow::categoriesButtonClicked() {
-    ui->checkboxArea->isHidden() ? ui->checkboxArea->setHidden(false) : ui->checkboxArea->setHidden(true);
+    if (ui->checkboxArea->isHidden()) {
+        ui->checkboxArea->setHidden(false);
+        ui->categoriesButton->setStyleSheet("border-bottom-right-radius: 0%; border-top-right-radius: 0%; margin-right: 0px; border-bottom-left-radius: 0px;");
+        ui->searchButton->setStyleSheet("border-bottom-left-radius: 0%; border-top-left-radius: 0%; border-left: 0px; border-bottom-right-radius: 0px;");
+    }
+    else {
+        ui->checkboxArea->setHidden(true);
+        ui->categoriesButton->setStyleSheet("border-bottom-right-radius: 0%; border-top-right-radius: 0%; margin-right: 0px; border-bottom-left-radius: 4px;");
+        ui->searchButton->setStyleSheet("border-bottom-left-radius: 0%; border-top-left-radius: 0%; border-left: 0px; border-bottom-right-radius: 4px;");
+    }
 }
 
 
 void MainWindow::searchButtonClicked() {
     product_page_index_ = 0;
+    ui->stackedWidget->setCurrentIndex(0);
+    ui->buttonsFrame->setHidden(false);
     ui->mainPrevButton->setDisabled(true);
     getSelectedCategories();
     search_phrase_ = ui->searchLine->text();
@@ -213,12 +236,14 @@ void MainWindow::logOut() {
     guestUiSetup();
     shopping_cart_page_->clearShoppingCartLocal();
     loadProductList();
+    QMessageBox::about(this, "Info", "Zostałeś wylogowany");
 }
 
 
 void MainWindow::showAccount() {
     ui->buttonsFrame->setHidden(true);
-    account_page_->fillUserData();
+    // account_page_->fillUserData();
+    account_page_->initializeList();
     ui->stackedWidget->setCurrentIndex(3);
 }
 
@@ -268,7 +293,7 @@ void MainWindow::getSelectedCategories() {
 
 void MainWindow::loadProductList() {
     // clear old products
-    while (ui->productsContainer->count() > 0) {
+    while (ui->productsContainer->count() > 1) {
         QLayoutItem* item = ui->productsContainer->takeAt(0);
         item->widget()->setParent(nullptr);
         ui->productsContainer->removeWidget(item->widget());
@@ -288,14 +313,13 @@ void MainWindow::loadProductList() {
     if (records_amount_ <= 0) {
         // if no products
         QLabel* no_products_label = new QLabel("Brak produktów", this);
-        ui->productsContainer->addWidget(no_products_label);
+        ui->productsContainer->insertWidget(0, no_products_label);
         return;
     }
 
     for (auto it : products) {
         ProductListElement* product_list_element = new ProductListElement(this, it, user_, db_.getUserNameAndSurname(it->getIdU()));
-        ui->productsContainer->addWidget(product_list_element);
-        ui->productsContainer->setAlignment(ui->productsContainer, Qt::AlignTop);
+        ui->productsContainer->insertWidget(0, product_list_element);
         QObject::connect(product_list_element, &ProductListElement::deleteProduct, this, &MainWindow::deleteProduct);
         QObject::connect(product_list_element, &ProductListElement::addProductToShoppingCart, this, &MainWindow::addProductToShoppingCart);
     }

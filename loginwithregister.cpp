@@ -1,7 +1,6 @@
 #include "loginwithregister.h"
 #include "ui_loginwithregister.h"
 
-#include <QDebug>
 
 LogInWithRegister::LogInWithRegister(Database* db)
     : ui(new Ui::LogInWithRegister)
@@ -66,6 +65,8 @@ void LogInWithRegister::logIn() {
     // try to sleep app  for about 3 secs
 
     emit userLoggedIn(user);
+
+    QMessageBox::about(this, "Info", "Logowanie zakończone sukcesem");
 
     this->close();
 }
@@ -155,6 +156,7 @@ void LogInWithRegister::checkEmail() {
     ok[2] = true;
 }
 
+
 void LogInWithRegister::checkPasswd() {
     passwd_ = ui->regpasswdLineEdit->text();
 
@@ -168,6 +170,7 @@ void LogInWithRegister::checkPasswd() {
     ok[3] = true;
 }
 
+
 void LogInWithRegister::checkZipCode() {
     zip_code_ = ui->regzipcodeLineEdit->text();
 
@@ -180,6 +183,7 @@ void LogInWithRegister::checkZipCode() {
     ui->regzipcodeLineEdit->setStyleSheet("");
     ok[4] = true;
 }
+
 
 void LogInWithRegister::checkCity() {
     city_ = ui->regcityLineEdit->text();
@@ -200,6 +204,7 @@ void LogInWithRegister::checkCity() {
     ui->regcityLineEdit->setStyleSheet("");
     ok[5] = true;
 }
+
 
 void LogInWithRegister::checkAddress() {
     address_ = ui->regaddressLineEdit->text();

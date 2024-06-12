@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['getadddate_0',['getAddDate',['../class_product.html#aaff1a43d0c6852fddc0b218ac8f80815',1,'Product']]],
+  ['getaddress_1',['getAddress',['../class_user.html#ae274a09b793bef29027be637c5cbae13',1,'User']]],
+  ['getallproducts_2',['getAllProducts',['../class_database.html#a31a4ff6af7a7a5266d24bbdb310b61de',1,'Database']]],
+  ['getamount_3',['getAmount',['../class_product.html#a400c4a05b2454e6ca0e9705326576077',1,'Product']]],
+  ['getcity_4',['getCity',['../class_user.html#ab4d39c9bdb1f5550c6ce0de2593ea53a',1,'User']]],
+  ['getclientsproducts_5',['getClientsProducts',['../class_database.html#a3c2a223ac34c5d810b4d34acdcf2f480',1,'Database']]],
+  ['getdescription_6',['getDescription',['../class_product.html#a945c48172567739c15f91381ee754c3e',1,'Product']]],
+  ['getemail_7',['getEmail',['../class_user.html#a080b4119344d333a59d14bd5d0667797',1,'User']]],
+  ['getid_8',['getId',['../class_product.html#a6cca56300caa309ce1f256a75b7afb32',1,'Product::getId()'],['../class_user.html#a010077fcd52d32fd3b4e1171f748a86a',1,'User::getId()']]],
+  ['getidu_9',['getIdU',['../class_product.html#a93eeb506fa333543f1423090b69fbc59',1,'Product']]],
+  ['getimgpath_10',['getImgPath',['../class_product.html#a488afaa852b9b376bfa52517efe7324d',1,'Product']]],
+  ['getname_11',['getName',['../class_product.html#a4e07082760c0834ccc8cd44e44a6aae6',1,'Product::getName()'],['../class_user.html#a1d31f09333b7df8ce56b5464f075ee90',1,'User::getName() const']]],
+  ['getp_5fcode_12',['getP_code',['../class_user.html#a15a4d6acd0d974a1e4cb5a8e413cf4ba',1,'User']]],
+  ['getpasswd_13',['getPasswd',['../class_user.html#af7f4a1a2a7961e14ce8d01ea4d1dea72',1,'User']]],
+  ['getprice_14',['getPrice',['../class_product.html#a3be25f647260d61df6063ef706261c7f',1,'Product']]],
+  ['getproductbyid_15',['getProductById',['../class_database.html#a5059c23b80653d64a194471f7c9072f7',1,'Database']]],
+  ['getproductfromshoppingcart_16',['getProductFromShoppingCart',['../class_database.html#a3d45d5bbf4563b8832411c419d476f9f',1,'Database']]],
+  ['getproductsbycategoriesandname_17',['getProductsByCategoriesAndName',['../class_database.html#a3cddfc41529e84cfdab1106640ecf1b1',1,'Database']]],
+  ['getprovince_18',['getProvince',['../class_user.html#a135fd8514bedae296f3fe40285d8e06f',1,'User']]],
+  ['getsurname_19',['getSurname',['../class_user.html#ab14fb502f6b059f93ac45d2cd5998a56',1,'User']]],
+  ['getusernameandsurname_20',['getUserNameAndSurname',['../class_database.html#aad41172e9ff7be3193e3a1ee2d8d9caf',1,'Database']]],
+  ['getuserssellproducts_21',['getUsersSellProducts',['../class_database.html#acbd6042ad9db858a982e23ba2d5fbd7c',1,'Database']]]
+];

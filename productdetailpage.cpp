@@ -1,7 +1,8 @@
 #include "productdetailpage.h"
 #include "ui_productdetailpage.h"
 
-ProductDetailPage::ProductDetailPage(const Product* product, const User* user, QString&& full_name_of_seller, const int shopping_cart_mode)
+ProductDetailPage::ProductDetailPage(const Product* product, const User* user,
+                                     QString&& full_name_of_seller, const int shopping_cart_mode)
     : ui(new Ui::ProductDetailPage)
     , product_(product)
     , user_(user)
@@ -43,6 +44,7 @@ ProductDetailPage::ProductDetailPage(const Product* product, const User* user, Q
     MultiPictures* pics = new MultiPictures(this, product->getImgPath());
     ui->leftVLayout->insertWidget(0, pics);
     ui->addDateLabel->setText(product->getAddDate());
+    ui->descriptionLabel->setText(product->getDescription());
     ui->productNameLabel->setText(product->getName());
     ui->productPriceNumLabel->setText(QString::number(product->getPrice()) + " zł");
 }

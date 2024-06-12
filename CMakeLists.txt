@@ -19,12 +19,16 @@ set(PROJECT_SOURCES
         mainwindow.ui
 )
 
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(shop
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         loginwithregister.h loginwithregister.cpp loginwithregister.ui
         database.h database.cpp
+        qdarkstyle/dark/darkstyle.qss
+        qdarkstyle/dark/darkstyle.qrc
+        qdarkstyle/dark/rc/
         resources.qrc
         user.h user.cpp
         accoutpage.h accoutpage.cpp accoutpage.ui
@@ -37,6 +41,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         finalizetransaction.h finalizetransaction.cpp finalizetransaction.ui
         editpersonaldataform.h editpersonaldataform.cpp editpersonaldataform.ui
         focuswatcher.h focuswatcher.cpp
+        buttonhoverwatcher.h buttonhoverwatcher.cpp
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET shop APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

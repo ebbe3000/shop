@@ -1,13 +1,13 @@
 #include "finalizetransaction.h"
 #include "ui_finalizetransaction.h"
 
-#include <QDebug>
 
 FinalizeTransaction::FinalizeTransaction(const User* user, const QVector<Product*>& products, const double price)
     : ui(new Ui::FinalizeTransaction)
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
+    setModal(true);
 
     ui->lhdRadioButton->setChecked(true);
     ui->nameAndSurnameLabel->setText(user->getName() + " " + user->getSurname());

@@ -249,6 +249,9 @@
         </layout>
        </item>
        <item>
+        <layout class="QVBoxLayout" name="addedPhotosLayout"/>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="addPhotosLayout">
          <property name="spacing">
           <number>6</number>

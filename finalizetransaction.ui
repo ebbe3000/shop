@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>364</width>
+    <width>391</width>
     <height>713</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>364</width>
+    <width>391</width>
     <height>713</height>
    </size>
   </property>
@@ -36,7 +36,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>344</width>
+        <width>371</width>
         <height>693</height>
        </rect>
       </property>
@@ -143,9 +143,9 @@
          <widget class="QLabel" name="nameAndSurnameLabel">
           <property name="geometry">
            <rect>
-            <x>0</x>
+            <x>10</x>
             <y>50</y>
-            <width>391</width>
+            <width>301</width>
             <height>16</height>
            </rect>
           </property>
@@ -175,9 +175,9 @@
          <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
-            <x>0</x>
+            <x>10</x>
             <y>70</y>
-            <width>321</width>
+            <width>311</width>
             <height>31</height>
            </rect>
           </property>
@@ -213,9 +213,9 @@
          <widget class="QLabel" name="addressLabel">
           <property name="geometry">
            <rect>
-            <x>0</x>
+            <x>10</x>
             <y>110</y>
-            <width>391</width>
+            <width>311</width>
             <height>16</height>
            </rect>
           </property>
@@ -232,9 +232,9 @@
          <widget class="QLabel" name="emailLabel">
           <property name="geometry">
            <rect>
-            <x>0</x>
+            <x>10</x>
             <y>140</y>
-            <width>391</width>
+            <width>301</width>
             <height>16</height>
            </rect>
           </property>

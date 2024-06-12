@@ -1,6 +1,7 @@
 #include "productlistelement.h"
 #include "ui_productlistelement.h"
 
+
 ProductListElement::ProductListElement(QWidget *parent, const Product* product, const User* user,
                                        QString&& full_name_of_seller, const int shopping_cart_mode)
     : QWidget(parent)
@@ -13,7 +14,25 @@ ProductListElement::ProductListElement(QWidget *parent, const Product* product, 
 
     QPixmap picture;
     picture.load(product_->getImgPath().first());
-    ui->imageLabel->setPixmap(picture.scaledToHeight(100));
+    picture = picture.scaledToHeight(100);
+
+
+    QImage out_pic(picture.width(), picture.height(), QImage::Format_ARGB32);
+    out_pic.fill(Qt::transparent);
+    QBrush brush(picture);
+    QPainter painter;
+    painter.begin(&out_pic);
+    painter.setBrush(brush);
+    painter.setPen(Qt::NoPen);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.drawRoundedRect(0, 0, out_pic.width(), out_pic.height(), 20, 20);
+    painter.end();
+
+    QPixmap pm = QPixmap::fromImage(out_pic);
+    pm = pm.scaled(picture.width(), picture.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    ui->imageLabel->setPixmap(pm);
+    ui->imageLabel->adjustSize();
+
     ui->nameLabel->setText(product_->getName());
     ui->amountNumberLabel->setText(QString::number(product_->getAmount()));
     ui->fullNameLabel->setHidden(true);

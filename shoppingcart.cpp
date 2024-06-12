@@ -1,7 +1,6 @@
 #include "shoppingcart.h"
 #include "ui_shoppingcart.h"
 
-#include <QDebug>
 
 ShoppingCart::ShoppingCart(QWidget *parent, Database* db, User* user)
     : QWidget(parent)
@@ -31,7 +30,7 @@ ShoppingCart::~ShoppingCart()
 
 
 void ShoppingCart::loadShoppingCart() {
-    while (ui->shoppingCartProductsLayout->count() > 0) {
+    while (ui->shoppingCartProductsLayout->count() > 1) {
         QLayoutItem* item = ui->shoppingCartProductsLayout->takeAt(0);
         item->widget()->setParent(nullptr);
         ui->shoppingCartProductsLayout->removeWidget(item->widget());
@@ -42,7 +41,8 @@ void ShoppingCart::loadShoppingCart() {
     if (shopping_cart_.size() <= 0) {
         // if no products
         QLabel* no_products_label = new QLabel("Brak produktów", this);
-        ui->shoppingCartProductsLayout->addWidget(no_products_label);
+        no_products_label->setAlignment(Qt::AlignCenter);
+        ui->shoppingCartProductsLayout->insertWidget(0, no_products_label);
         ui->priceLabel->setText(QString::number(full_price_) + " zł");
         ui->finalizeButton->setDisabled(true);
         return;
@@ -52,8 +52,8 @@ void ShoppingCart::loadShoppingCart() {
     for (auto it : shopping_cart_) {
         ProductListElement* product_list_element = new ProductListElement(this, it, user_, db_->getUserNameAndSurname(it->getIdU()), 1);
         full_price_ += it->getPrice() * it->getAmount();
-        ui->shoppingCartProductsLayout->addWidget(product_list_element);
-        ui->shoppingCartProductsLayout->setAlignment(product_list_element, Qt::AlignTop);
+        ui->shoppingCartProductsLayout->insertWidget(0, product_list_element);
+        // ui->shoppingCartProductsLayout->setAlignment(product_list_element, Qt::AlignTop);
         QObject::connect(product_list_element, &ProductListElement::deleteProduct, this, &ShoppingCart::onDeleteProduct);
     }
     ui->priceLabel->setText(QString::number(full_price_) + " zł");
@@ -144,7 +144,7 @@ void ShoppingCart::boughtProducts(const QString& delivery_option) {
         }
 
     if (!(size == shopping_cart_.size())) {
-        QMessageBox::about(this, "Info", "Produkt niedostępny, odswierz koszyk");
+        QMessageBox::about(this, "Info", "Produkt niedostępny, odswież koszyk");
         return;
     }
 

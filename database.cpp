@@ -2,7 +2,7 @@
 
 
 Database::Database() : db(QSqlDatabase::addDatabase("QMYSQL")) {
-    db.setHostName("localhost");
+    db.setHostName("127.0.0.1");
     db.setDatabaseName("shop_db");
     db.setUserName("root");
     db.setPassword("");
@@ -351,4 +351,16 @@ void Database::moveShoppingCartToPurchased(const int id_u, const int id_p, const
                                            const QString& delivery_option, const QString& address) {
     QSqlQuery query("INSERT INTO purchased_products(id_u, id_p, amount, delivery_option, buyers_address) "
                     "VALUES (" + QString::number(id_u) + ", " + QString::number(id_p) + ", " + QString::number(amount) + ", '" + delivery_option + "', '" + address + "');");
+}
+
+void Database::editUserData(User *user) {
+    QSqlQuery("CALL editUserData(" + QString::number(user->getId()) + ", '"
+                                   + user->getName() + "', '"
+                                   + user->getSurname() + "', '"
+                                   + user->getEmail() + "', '"
+                                   + user->getPasswd() + "', '"
+                                   + user->getProvince() + "', '"
+                                   + user->getP_code() + "', '"
+                                   + user->getCity() + "', '"
+                                   + user->getAddress() + "');");
 }
